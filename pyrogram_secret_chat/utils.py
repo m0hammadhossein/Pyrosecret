@@ -201,14 +201,7 @@ def save_photo(msg: SecretMessage, out=Union[str, io.BytesIO]) -> Union[str, io.
         fp = out if isinstance(out, io.BytesIO) else open(out, "wb+")
         fp.write(data)
 
-        while True:
-            ochunk = fp.read(part_size)
-            if not ochunk:
-                break
-            chunk = aes.ige256_decrypt(ochunk, key, iv)
-            fp.seek(fp.tell()-len(ochunk))
-            fp.write(chunk)
-        
+
         if isinstance(out, str):
             fp.close()
             return out
