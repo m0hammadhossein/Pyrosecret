@@ -198,7 +198,7 @@ def save_photo(msg: SecretMessage, out=Union[str, io.BytesIO]) -> Union[str, io.
         data = msg.raw.media.thumb
         key = msg.raw.media.key
         iv = msg.raw.media.iv
-        fp = out if isinstance(out, io.BytesIO) else open(out, "wb")
+        fp = out if isinstance(out, io.BytesIO) else open(out, "wb+")
         fp.write(data)
 
         while True:
